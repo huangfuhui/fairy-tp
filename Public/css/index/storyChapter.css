@@ -1,0 +1,142 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.float-clean {
+    clear: both;
+}
+
+.btn-green {
+    background-color: #21c2ba;
+    border-radius: 5px;
+    border: solid 1px #606060;
+}
+
+.btn-white {
+    background-color: white;
+    border-radius: 5px;
+    border: solid 1px lightgrey;
+}
+
+.header, .footer {
+    background-color: #20B2AA;
+    border: solid 1px #008080;
+}
+
+.head-nav {
+    height: 40px;
+    text-align: center;
+}
+
+.home {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    margin-top: 4px;
+    margin-left: 6%;
+    padding: 5px 10px;
+}
+
+.head-nav #head-title {
+    display: inline-block;
+    margin-top: 5px;
+    font-size: 1.25em;
+}
+
+.introduction {
+    background-color: rgba(56, 238, 209, 0.13);
+    padding: 5px;
+}
+
+.introduction #story-cover {
+    float: left;
+}
+
+.introduction img {
+    width: 100px;
+    height: 120px;
+}
+
+.introduction #story-info {
+    float: left;
+    width: 50%;
+    margin: 10px 25px;
+}
+
+.head-hr {
+    height: 35px;
+}
+
+.head-hr .tips {
+    float: left;
+    margin-top: 5px;
+    margin-left: 5%;
+}
+
+.head-hr .btn-green {
+    float: right;
+    padding: 2px 10px;
+    margin-top: 3px;
+    margin-right: 10%;
+}
+
+.chapter-list {
+    margin: 0px;
+}
+
+.chapter-href {
+    background-color: #ececec;
+    display: block;
+    padding: 10px;
+    border-bottom: solid 1px #c6c6c6;
+}
+
+.single-row {
+    background-color: #fbfbfb;
+}
+
+.page-selector {
+    text-align: center;
+    margin-top: 10px;
+    background-color: #ececec;
+}
+
+.page-selector a {
+    padding: 2px 6px;
+}
+
+.first-selector-row {
+    padding: 15px;
+}
+
+.second-selector-row {
+    padding-bottom: 15px;
+}
+
+.second-selector-row span {
+    padding: 2px 6px;
+}
+
+.jump-form {
+    display: inline-block;
+}
+
+.jump-form input {
+    width: 40px;
+    border: 1px solid #ccc;
+    text-indent: 0px;
+    display: block;
+}
+
+.footer {
+    margin-top: 5px;
+    height: 40px;
+    text-align: center;
+    color: #616161;
+}
