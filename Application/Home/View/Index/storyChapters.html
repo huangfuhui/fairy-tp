@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-transform "/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+    <meta name="keywords" content="{$introduction['name']}"/>
+    <meta name="description" content="{$introduction['name']}"/>
+
+    <title>{$introduction.name}</title>
+
+    <link rel="stylesheet" href="__PUBLIC__/css/index/storyChapter.css"/>
+</head>
+<body>
+<div class="header">
+    <div class="head-nav">
+        <span class="home btn-green"><a href="{:U('home/index/storyChapters')}">首页</a></span>
+        <span id="head-title">{$introduction.name}</span>
+    </div>
+</div>
+
+<div class="body">
+    <div class="introduction">
+        <div id="story-cover"><img src="{$introduction.cover_url}"/></div>
+        <div id="story-info">
+            <div>作者：{$introduction.author}</div>
+            <div>简介：{$introduction.introduction}</div>
+        </div>
+        <div class="float-clean"></div>
+    </div>
+
+    <div class="header head-hr">
+        <span class="tips">章节目录</span>
+        <span class="sort btn-green">
+            <if condition="$orderTag eq -1">
+                <a href="{:U('Index/storyChapters', array('order' => 1))}">正序</a>
+                <else />
+                <a href="{:U('Index/storyChapters', array('order' => -1))}">反序</a>
+            </if>
+        </span>
+    </div>
+
+        <div class="chapter-list">
+            <volist name="chapterList" id="vo" key="k">
+                <if condition="$k % 2 eq 0">
+                    <a class="chapter-href double-row" href="{:U('Index/storyContent', array('chapterId' => $vo['id']))}">{$vo.chapter_name}</a>
+                    <else />
+                    <a class="chapter-href single-row" href="{:U('Index/storyContent', array('chapterId' => $vo['id']))}">{$vo.chapter_name}</a>
+                </if>
+            </volist>
+        </div>
+
+    <div class="page-selector">
+        <div class="first-selector-row">
+            <span><a class="btn-white" href="{:U('Index/storyChapters', array('page' => 1))}">首页</a></span>
+            <span><a class="btn-white" href="{:U('Index/storyChapters', array('page' => $currentPage - 1))}">上一页</a></span>
+            <span><a class="btn-white" href="{:U('Index/storyChapters', array('page' => $currentPage + 1))}">下一页</a></span>
+            <span><a class="btn-white" href="{:U('Index/storyChapters', array('page' => $totalPage))}">尾页</a></span>
+        </div>
+
+        <div class="second-selector-row">
+            <span><a class="btn-white">{$currentPage}/{$totalPage}</a></span>
+            <span class="jump-form">
+                <form action="" method="get">
+                    <input type="text" placeholder="输入.." name="page"/>
+                </form>
+            </span>
+        <span><a class="btn-white">跳转</a></span>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <span>小精灵手机小说</span>
+</div>
+</body>
+</html>
