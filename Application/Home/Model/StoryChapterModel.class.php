@@ -84,6 +84,15 @@ class StoryChapterModel extends Model
     }
 
     /**
+     * @param $chapterId
+     * @param $contentId
+     */
+    public function updateContentId($chapterId, $contentId)
+    {
+        $this->where(array('id' => $chapterId))->save(array('content_id' => $contentId));
+    }
+
+    /**
      * 获取上一章节ID
      * @param $chapterId
      * @return int

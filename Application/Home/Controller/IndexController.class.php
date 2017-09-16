@@ -71,7 +71,11 @@ class IndexController extends Controller
         // 无法获取章节对应的小说内容，则策略拉取并本地落库保存
         if (null == $contentId) {
             $ant = A('Ant');
-            $content = $ant->getStoryContent($chapterDetail['chapter_url']);
+            $storyContent = $ant->getStoryContent($chapterDetail['chapter_url']);
+            $contentId = $storyContent['id'];
+            $content = $storyContent['content'];
+
+            D('StoryChapter')->updateContentId($chapterId, $contentId);
         } else {
             $content = D('StoryContent')->getContent($contentId);
         }

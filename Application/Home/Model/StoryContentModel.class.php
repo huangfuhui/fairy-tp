@@ -26,9 +26,11 @@ class StoryContentModel extends Model
     /**
      * 保存小说内容
      * @param mixed|string $content
+     * @return mixed
      */
     public function saveContent($content)
     {
-        $this->add(array('content' => $content));
+        $id = $this->add(array('content' => $content));
+        return $id;
     }
 }

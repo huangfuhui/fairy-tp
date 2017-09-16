@@ -51,8 +51,8 @@ class AntController
         $content = $data[1][0];
 
         // 保存小说内容
-        D('StoryContent')->saveContent($content);
+        $content_id = D('StoryContent')->saveContent($content);
 
-        return $content;
+        return array('id' => $content_id, 'content' => $content);
     }
 }
