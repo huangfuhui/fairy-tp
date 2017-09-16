@@ -53,6 +53,12 @@ a {
     height: 2px;
 }
 
+.chapter-name {
+    text-align: center;
+    font-size: 1.1em;
+    padding: 10px 0px;
+}
+
 .content {
     padding: 3px;
 }
