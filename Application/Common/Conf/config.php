@@ -18,4 +18,5 @@ return array(
      */
     'URL_CASE_INSENSITIVE' => true, // URL大小写不敏感
     'URL_MODEL' => 2,               // URL支持REWRITE模式
+    'URL_HTML_SUFFIX' => ''         // URL伪静态后缀
 );

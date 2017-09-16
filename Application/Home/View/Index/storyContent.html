@@ -17,16 +17,16 @@
 <body>
 <div class="header">
     <div class="head-nav">
-        <span class="home btn-green"><a href="{:U('home/index/storyChapters')}">首页</a></span>
+        <span class="home btn-green"><a href="{:U('home/index/storyChapters', array('storyId' => $chapterDetail['story_id']))}">首页</a></span>
         <span id="head-title">{$introduction.name}</span>
     </div>
 </div>
 
 <div class="page-selector">
     <div class="first-selector-row">
-        <span><a class="btn-white" href="{:U('Index/storyContent', array('chapterId' => $lastChapter))}">上一章</a></span>
-        <span><a class="btn-white" href="{:U('Index/storyChapters')}">目录</a></span>
-        <span><a class="btn-white" href="{:U('Index/storyContent', array('chapterId' => $nextChapter))}">下一章</a></span>
+        <span><a class="btn-white" href="{:U('Index/storyContent', array('storyId' => $chapterDetail['story_id'], 'chapterId' => $lastChapter))}">上一章</a></span>
+        <span><a class="btn-white" href="{:U('Index/storyChapters', array('storyId' => $chapterDetail['story_id']))}">目录</a></span>
+        <span><a class="btn-white" href="{:U('Index/storyContent', array('storyId' => $chapterDetail['story_id'], 'chapterId' => $nextChapter))}">下一章</a></span>
     </div>
 </div>
 
@@ -43,9 +43,9 @@
 
     <div class="page-selector">
         <div class="second-selector-row">
-            <span><a class="btn-white" href="{:U('Index/storyContent', array('chapterId' => $lastChapter))}">上一章</a></span>
-            <span><a class="btn-white" href="{:U('Index/storyChapters')}">目录</a></span>
-            <span><a class="btn-white" href="{:U('Index/storyContent', array('chapterId' => $nextChapter))}">下一章</a></span>
+            <span><a class="btn-white" href="{:U('Index/storyContent', array('storyId' => $chapterDetail['story_id'],'chapterId' => $lastChapter))}">上一章</a></span>
+            <span><a class="btn-white" href="{:U('Index/storyChapters', array('storyId' => $chapterDetail['story_id']))}">目录</a></span>
+            <span><a class="btn-white" href="{:U('Index/storyContent', array('storyId' => $chapterDetail['story_id'],'chapterId' => $nextChapter))}">下一章</a></span>
         </div>
     </div>
 </div>

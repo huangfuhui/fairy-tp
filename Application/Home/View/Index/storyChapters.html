@@ -17,7 +17,7 @@
 <body>
 <div class="header">
     <div class="head-nav">
-        <span class="home btn-green"><a href="{:U('home/index/storyChapters')}">首页</a></span>
+        <span class="home btn-green"><a href="{:U('home/index/storyChapters', array('storyId' => $introduction['id']))}">首页</a></span>
         <span id="head-title">{$introduction.name}</span>
     </div>
 </div>
@@ -36,9 +36,9 @@
         <span class="tips">章节目录</span>
         <span class="sort btn-green">
             <if condition="$orderTag eq -1">
-                <a href="{:U('Index/storyChapters', array('order' => 1))}">正序</a>
+                <a href="{:U('Index/storyChapters', array('storyId' => $introduction['id'], 'order' => 1))}">正序</a>
                 <else />
-                <a href="{:U('Index/storyChapters', array('order' => -1))}">反序</a>
+                <a href="{:U('Index/storyChapters', array('storyId' => $introduction['id'], 'order' => -1))}">反序</a>
             </if>
         </span>
     </div>
@@ -46,29 +46,29 @@
         <div class="chapter-list">
             <volist name="chapterList" id="vo" key="k">
                 <if condition="$k % 2 eq 0">
-                    <a class="chapter-href double-row" href="{:U('Index/storyContent', array('chapterId' => $vo['id']))}">{$vo.chapter_name}</a>
+                    <a class="chapter-href double-row" href="{:U('Index/storyContent', array('storyId' => $introduction['id'], 'chapterId' => $vo['id']))}">{$vo.chapter_name}</a>
                     <else />
-                    <a class="chapter-href single-row" href="{:U('Index/storyContent', array('chapterId' => $vo['id']))}">{$vo.chapter_name}</a>
+                    <a class="chapter-href single-row" href="{:U('Index/storyContent', array('storyId' => $introduction['id'], 'chapterId' => $vo['id']))}">{$vo.chapter_name}</a>
                 </if>
             </volist>
         </div>
 
     <div class="page-selector">
         <div class="first-selector-row">
-            <span><a class="btn-white" href="{:U('Index/storyChapters', array('page' => 1))}">首页</a></span>
-            <span><a class="btn-white" href="{:U('Index/storyChapters', array('page' => $currentPage - 1))}">上一页</a></span>
-            <span><a class="btn-white" href="{:U('Index/storyChapters', array('page' => $currentPage + 1))}">下一页</a></span>
-            <span><a class="btn-white" href="{:U('Index/storyChapters', array('page' => $totalPage))}">尾页</a></span>
+            <span><a class="btn-white" href="{:U('Index/storyChapters', array('storyId' => $introduction['id'], 'page' => 1))}">首页</a></span>
+            <span><a class="btn-white" href="{:U('Index/storyChapters', array('storyId' => $introduction['id'], 'page' => $currentPage - 1))}">上一页</a></span>
+            <span><a class="btn-white" href="{:U('Index/storyChapters', array('storyId' => $introduction['id'], 'page' => $currentPage + 1))}">下一页</a></span>
+            <span><a class="btn-white" href="{:U('Index/storyChapters', array('storyId' => $introduction['id'], 'page' => $totalPage))}">尾页</a></span>
         </div>
 
         <div class="second-selector-row">
             <span><a class="btn-white">{$currentPage}/{$totalPage}</a></span>
             <span class="jump-form">
-                <form action="" method="get">
-                    <input type="text" placeholder="输入.." name="page"/>
+                <form id="jump-form" action="{:U('Index/storyChapters/', array('storyId' => $introduction['id']))}" method="get">
+                    <input type="text" placeholder="输入.." id="jump-page" name="page"/>
                 </form>
             </span>
-        <span><a class="btn-white">跳转</a></span>
+        <span><a class="btn-white" onclick="jump();">跳转</a></span>
         </div>
     </div>
 </div>
@@ -76,5 +76,16 @@
 <div class="footer">
     <span>小精灵手机小说</span>
 </div>
+
+<script>
+    /**
+     * 页码跳转
+     */
+    function jump() {
+        var jumpPage = document.getElementById("jump-page").value;
+        var jumpForm = document.getElementById("jump-form");
+        window.location.href = jumpForm.getAttribute("action") + "/page/" + jumpPage;
+    }
+</script>
 </body>
 </html>
