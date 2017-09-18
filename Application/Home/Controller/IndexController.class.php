@@ -17,6 +17,21 @@ class IndexController extends Controller
     }
 
     /**
+     * 搜索引擎
+     */
+    public function search()
+    {
+        $key = I('get.key');
+
+        // 调用Ant
+        $ant = A('Ant');
+        $result = $ant->getSearch($key);
+
+        $this->assign('result', $result);
+        $this->display();
+    }
+
+    /**
      * 展示小说章节目录
      */
     public function storyChapters()

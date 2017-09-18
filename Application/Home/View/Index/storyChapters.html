@@ -43,15 +43,15 @@
         </span>
     </div>
 
-        <div class="chapter-list">
-            <volist name="chapterList" id="vo" key="k">
-                <if condition="$k % 2 eq 0">
-                    <a class="chapter-href double-row" href="{:U('Index/storyContent', array('storyId' => $introduction['id'], 'chapterId' => $vo['id']))}">{$vo.chapter_name}</a>
-                    <else />
-                    <a class="chapter-href single-row" href="{:U('Index/storyContent', array('storyId' => $introduction['id'], 'chapterId' => $vo['id']))}">{$vo.chapter_name}</a>
-                </if>
-            </volist>
-        </div>
+    <div class="chapter-list">
+        <volist name="chapterList" id="vo" key="k">
+            <if condition="$k % 2 eq 0">
+                <a class="chapter-href double-row" href="{:U('Index/storyContent', array('storyId' => $introduction['id'], 'chapterId' => $vo['id']))}">{$vo.chapter_name}</a>
+                <else />
+                <a class="chapter-href single-row" href="{:U('Index/storyContent', array('storyId' => $introduction['id'], 'chapterId' => $vo['id']))}">{$vo.chapter_name}</a>
+            </if>
+        </volist>
+    </div>
 
     <div class="page-selector">
         <div class="first-selector-row">

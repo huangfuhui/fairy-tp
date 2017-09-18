@@ -1,0 +1,66 @@
+.search-input {
+    border: 1px solid #e7e7e7;
+    background-color: rgba(156, 255, 157, 0.11);
+    height: 60px;
+}
+
+.search-tips {
+    float: left;
+    font-size: 1.05em;
+    border: 1px solid gray;
+    color: white;
+    background-color: #1b6d85;
+    margin: 20px 0 0 6%;
+}
+
+.search-input input {
+    margin: 20px 0 0 1%;
+    font-size: 1.07em;
+    width: 40%;
+}
+
+.search-btn {
+    margin: 20px 0 0 4%;
+}
+
+.search-btn a {
+    padding: 2px 10px;
+}
+
+.head-hr {
+    height: 25px;
+    color: #f5f5f5;
+    font-size: 1.04em;
+}
+
+.head-hr span {
+    float: left;
+    margin-left: 2%;
+}
+
+.search-result {
+    margin: 0px;
+}
+
+.chapter-href {
+    background-color: #ececec;
+    display: block;
+    padding: 10px;
+    border-bottom: solid 1px #c6c6c6;
+}
+
+.single-row {
+    background-color: #fbfbfb;
+}
+
+.storyName {
+    float: left;
+    font-size: 1.05em;
+}
+
+.author {
+    float: left;
+    margin: 2% 0 0 5%;
+    font-size: 0.8em;
+    color: #7c7c7c;
+}

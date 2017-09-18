@@ -1,0 +1,66 @@
+<extend name="base"/>
+
+<block name="title">
+    <title>小精灵小说|搜索</title>
+</block>
+
+<block name="css">
+    <link rel="stylesheet" href="__PUBLIC__/css/index/search.css"/>
+</block>
+
+<block name="js">
+    <script type="text/javascript" src="__PUBLIC__/js/jquery-3.2.1.min.js"></script>
+</block>
+
+<block name="body">
+    <div id="body">
+        <div class="search-input">
+            <span class="search-tips">书名或作者</span>
+            <input id="key" type="text" name="key" placeholder="请输入想看的^_^"/>
+            <span class="search-btn"><a class="btn-green" onclick="makeSearch();">查找</a></span>
+        </div>
+
+        <div class="header head-hr">
+            <span>搜索结果</span>
+        </div>
+
+        <div class="search-result">
+            <volist name="result" id="vo" key="k">
+                <if condition="$k % 2 eq 0">
+                    <a class="chapter-href double-row" href="#">
+                        <span class="storyName">{$vo.storyName}</span>
+                        <span class="author">作者：{$vo.author}</span>
+                        <div class="float-clean"></div>
+                    </a>
+                    <else/>
+                    <a class="chapter-href single-row" href="#">
+                        <span class="storyName">{$vo.storyName}</span>
+                        <span class="author">作者：{$vo.author}</span>
+                        <div class="float-clean"></div>
+                    </a>
+                </if>
+            </volist>
+        </div>
+    </div>
+</block>
+
+<block name="script">
+    <script>
+        $(document).ready(function () {
+                var minHeight = $(window).height() - 100;
+                $("#body").attr("style", "min-height: " + minHeight + "px;");
+            }
+        )
+
+        /**
+         * 发起查找
+         */
+        function makeSearch() {
+            var baseUrl = "{:U('/Home/index/search')}";
+            var key = $("#key").val();
+            console.log("key = " + key);
+            window.location.href = baseUrl + "/key/" + key;
+        }
+    </script>
+</block>
+

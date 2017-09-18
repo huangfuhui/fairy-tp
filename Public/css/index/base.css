@@ -1,0 +1,54 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.float-clean {
+    clear: both;
+}
+
+.btn-green {
+    background-color: #21c2ba;
+    border-radius: 5px;
+    border: solid 1px #606060;
+}
+
+.btn-white {
+    background-color: white;
+    border-radius: 5px;
+    border: solid 1px lightgrey;
+}
+
+.header, .footer {
+    background-color: #20B2AA;
+    border: solid 1px #008080;
+}
+
+.head-nav {
+    height: 50px;
+}
+
+.logo {
+    float: left;
+    margin: 3px 3%;
+    width: 100px;
+    height: 40px;
+}
+
+.home {
+    float: right;
+    margin: 8px 10%;
+    padding: 5px 8px;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 5px;
+    height: 40px;
+    color: #616161;
+}

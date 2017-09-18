@@ -8,12 +8,15 @@ return array(
     /**
      * 目标URL
      */
-    'ANT_BASE_URL' => 'i.biquge5200.com',                               // 首页
-    'ANT_TOP_CLICK_URL' => 'i.biquge5200.com/top-monthvisit-',        // 点击榜
+    'ANT_BASE_URL' => 'i.biquge5200.com',                                       // 首页
+    'ANT_TOP_CLICK_URL' => 'i.biquge5200.com/top-monthvisit-',                  // 点击榜
+    'ANT_SEARCH_URL' => 'i.biquge5200.com/modules/article/waps.php?keyword=',   // 搜索
 
     /**
      * 正则表达式
      */
+    // 搜索结果列表
+    'ANT_SEARCH_LIST_PATTERN' => '[<p class="line"><a href=".*">.*</a><a href="(.*)" class="blue">(.*)</a>/<a href="/author/.*">(.*)</a></p>]',
     // 点击榜列表
     'ANT_TOP_CLICK_LIST_PATTERN' => '[<p class="line"><a href=".*">.*</a><a href="(.*)" class="blue">(.*)</a>/<a href=".*">(.*)</a></p>]',
     // 点击榜总页数

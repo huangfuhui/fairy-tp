@@ -130,7 +130,7 @@ a {
 .jump-form input {
     width: 40px;
     border: 1px solid #ccc;
-    text-indent: 0px;
+    text-indent: 0;
     display: block;
 }
 
