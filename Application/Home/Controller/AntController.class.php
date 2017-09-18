@@ -11,6 +11,27 @@ class AntController
 {
 
     /**
+     * 调用目标搜索引擎
+     * @param $key
+     * @return array
+     */
+    public function getSearch($key)
+    {
+        $res = curl_get(C('ANT_SEARCH_URL') . urlencode(trim($key)));
+        preg_match_all(C('ANT_SEARCH_LIST_PATTERN'), $res, $result);
+
+        // 拼接数据
+        $list = array();
+        foreach ($result[3] as $k => $v) {
+            $list[$k]['author'] = $v;
+            $list[$k]['storyName'] = $result[2][$k];
+            $list[$k]['storyUrl'] = C('ANT_BASE_URL') . $result[1][$k];
+        }
+
+        return $list;
+    }
+
+    /**
      * 爬取点击榜
      */
     public function getTopClick()
