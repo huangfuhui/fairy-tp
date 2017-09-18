@@ -13,6 +13,17 @@ use Think\Model;
 class StoryTopClickModel extends Model
 {
     /**
+     * 获取点击榜信息
+     * @param int $start
+     * @param int $limit
+     * @return mixed
+     */
+    public function getTopClick($start = 0, $limit = 20)
+    {
+        return $this->order('id asc')->limit($start, $limit)->select();
+    }
+
+    /**
      * 批量更新点击榜
      * note:当前策略是删除旧榜单，维持表中数据的新鲜度
      * @param $data

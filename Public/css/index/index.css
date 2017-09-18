@@ -27,19 +27,14 @@
     padding: 2px 10px;
 }
 
-.head-hr {
-    height: 25px;
-    color: #f5f5f5;
-    font-size: 1.04em;
+.top-click-title {
+    background-color: #efefef;
+    height: 30px;
 }
 
-.head-hr span {
+.top-click-title span {
     float: left;
-    margin-left: 2%;
-}
-
-.search-result {
-    margin: 0px;
+    margin: 5px 0 0 2%;
 }
 
 .chapter-href {

@@ -13,6 +13,9 @@ class IndexController extends Controller
 {
     public function index()
     {
+        $topClicks = D('StoryTopClick')->getTopClick();
+
+        $this->assign('topClicks', $topClicks);
         $this->display();
     }
 
