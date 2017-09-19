@@ -11,9 +11,13 @@ use Think\Controller;
 
 class IndexController extends Controller
 {
+    /**
+     * 首页
+     */
     public function index()
     {
-        $topClicks = D('StoryTopClick')->getTopClick();
+        // 获取点击榜前20
+        $topClicks = D('StoryTopClick')->getTopClick(0, 20);
 
         $this->assign('topClicks', $topClicks);
         $this->display();
@@ -39,32 +43,35 @@ class IndexController extends Controller
      */
     public function storyChapters()
     {
-        $storyId = empty(I('storyId')) ? 1 : I('storyId');
+        $storyMd5 = I('id');
+        if (empty($storyMd5)) {
+            redirect(U('Home/Index/index'));
+        }
         $requestPage = empty(I('page')) ? 1 : I('page');
         $order = (!empty(I('order')) && I('order') == 1) ? $order = 'id asc' : $order = 'id desc';
         $orderTag = (!empty(I('order')) && I('order') == 1) ? $orderInfo = 1 : $orderInfo = -1;
 
-        $chapterCount = D('StoryChapter')->getChapterCount($storyId);
-        $totalPage = ceil($chapterCount / 20);
-        // 处理分页请求的合法性
-        if ($requestPage < 1) {
-            $requestPage = 1;
-        } elseif ($requestPage > $totalPage) {
-            $requestPage = $totalPage;
-        }
-
-        // 获取小说简介
-        $storyIntroduction = D('StoryInfo')->getStoryInfo($storyId);
-
-        // 获取小说章节列表
-        $start = ($requestPage - 1) * 20;
-        $chapterList = D('StoryChapter')->getChapterList($storyId, $start, 20, $order);
-
-        $this->assign('introduction', $storyIntroduction);
-        $this->assign('chapterList', $chapterList);
-        $this->assign('totalPage', $totalPage);
-        $this->assign('currentPage', $requestPage);
-        $this->assign('orderTag', $orderTag);
+//        $chapterCount = D('StoryChapter')->getChapterCount($storyId);
+//        $totalPage = ceil($chapterCount / 20);
+//        // 处理分页请求的合法性
+//        if ($requestPage < 1) {
+//            $requestPage = 1;
+//        } elseif ($requestPage > $totalPage) {
+//            $requestPage = $totalPage;
+//        }
+//
+//        // 获取小说简介
+//        $storyIntroduction = D('StoryInfo')->getStoryInfo($storyId);
+//
+//        // 获取小说章节列表
+//        $start = ($requestPage - 1) * 20;
+//        $chapterList = D('StoryChapter')->getChapterList($storyId, $start, 20, $order);
+//
+//        $this->assign('introduction', $storyIntroduction);
+//        $this->assign('chapterList', $chapterList);
+//        $this->assign('totalPage', $totalPage);
+//        $this->assign('currentPage', $requestPage);
+//        $this->assign('orderTag', $orderTag);
         $this->display();
     }
 

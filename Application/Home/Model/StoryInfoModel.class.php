@@ -20,4 +20,14 @@ class StoryInfoModel extends Model
     {
         return $this->where(array('id' => $storyId))->find();
     }
+
+    /**
+     * 根据MD5获取小说简介
+     * @param $storyMd5
+     * @return mixed
+     */
+    public function getStoryInfoByMd5($storyMd5)
+    {
+        return $this->where(array('md5' => $storyMd5))->find();
+    }
 }

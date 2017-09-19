@@ -30,13 +30,13 @@
         <div class="top-click-list">
             <volist name="topClicks" id="vo" key="k">
                 <if condition="$k % 2 eq 0">
-                    <a class="chapter-href double-row" href="#">
+                    <a class="chapter-href double-row" href="{:U('Index/storyChapters')}/id/{$vo.md5}">
                         <span class="storyName">{$vo.story_name}</span>
                         <span class="author">作者：{$vo.author}</span>
                         <div class="float-clean"></div>
                     </a>
                     <else/>
-                    <a class="chapter-href single-row" href="#">
+                    <a class="chapter-href single-row" href="{:U('Index/storyChapters')}/id/{$vo.md5}">
                         <span class="storyName">{$vo.story_name}</span>
                         <span class="author">作者：{$vo.author}</span>
                         <div class="float-clean"></div>

@@ -20,7 +20,11 @@ class StoryTopClickModel extends Model
      */
     public function getTopClick($start = 0, $limit = 20)
     {
-        return $this->order('id asc')->limit($start, $limit)->select();
+        $res = $this->order('id asc')->limit($start, $limit)->select();
+        foreach ($res as $k => $v) {
+            $res[$k]['md5'] = md5($v['story_name'] . '|' . $v['author']);
+        }
+        return $res;
     }
 
     /**
