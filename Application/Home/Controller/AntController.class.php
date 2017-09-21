@@ -106,7 +106,7 @@ class AntController
      * @param $storyId
      * @param int $requestPage
      * @param int $orderTag
-     * @return array|void
+     * @return array
      */
     public function getStoryChaptersSync($storyId, $requestPage = 1, $orderTag = -1)
     {

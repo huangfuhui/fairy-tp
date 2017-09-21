@@ -92,7 +92,7 @@ class IndexController extends Controller
         $storyId = I('storyId');
         $chapterUrl = I('link');
 
-        if (empty($chapterUrl) || 1 == substr_count($chapterUrl, '1')) {
+        if (empty($chapterUrl) || 1 == substr_count($chapterUrl, '-')) {
             redirect(U('Home/Index/storyChapters', array('id' => $storyId)));
         }
 
