@@ -1,34 +1,3 @@
-* {
-    margin: 0px;
-    padding: 0px;
-}
-
-a {
-    text-decoration: none;
-    color: #000000;
-}
-
-.float-clean {
-    clear: both;
-}
-
-.btn-green {
-    background-color: #21c2ba;
-    border-radius: 5px;
-    border: solid 1px #606060;
-}
-
-.btn-white {
-    background-color: white;
-    border-radius: 5px;
-    border: solid 1px lightgrey;
-}
-
-.header, .footer {
-    background-color: #20B2AA;
-    border: solid 1px #008080;
-}
-
 .head-nav {
     height: 40px;
     text-align: center;
@@ -67,6 +36,12 @@ a {
     float: left;
     width: 50%;
     margin: 10px 25px;
+}
+
+.introduction #story-intro {
+    font-size: 0.9em;
+    color: #383838;
+    padding: 1% 2%;
 }
 
 .head-hr {
