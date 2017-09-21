@@ -1,57 +1,66 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta http-equiv="Cache-Control" content="no-transform "/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<extend name="base"/>
 
+<bock name="meta">
     <meta name="keywords" content="{$introduction['name']} 小说"/>
     <meta name="description" content="{$introduction['name']} 无广告 无弹窗"/>
+</bock>
 
+<block name="title">
     <title>{$introduction.name}|{$name}</title>
+</block>
 
+<block name="css">
     <link rel="stylesheet" href="__PUBLIC__/css/index/storyContent.css"/>
-</head>
-<body>
-<div class="header">
-    <div class="head-nav">
-        <span class="home btn-green"><a href="{:U('home/index/storyChapters', array('storyId' => $chapterDetail['story_id']))}">首页</a></span>
-        <span id="head-title">{$introduction.name}</span>
-    </div>
-</div>
+</block>
 
-<div class="page-selector">
-    <div class="first-selector-row">
-        <span><a class="btn-white" href="{:U('Index/storyContent', array('storyId' => $introduction['md5'], 'link' => $lastChapter))}">上一章</a></span>
-        <span><a class="btn-white" href="{:U('Index/storyChapters', array('id' => $introduction['md5']))}">目录</a></span>
-        <span><a class="btn-white" href="{:U('Index/storyContent', array('storyId' => $introduction['md5'], 'link' => $nextChapter))}">下一章</a></span>
-    </div>
-</div>
-
-<div class="header head-hr"></div>
-
-<div class="body">
-    <div class="chapter-name">
-        {$name}
-    </div>
-
-    <div class="content">
-        {$content}
-    </div>
-
-    <div class="page-selector">
-        <div class="second-selector-row">
-            <span><a class="btn-white" href="{:U('Index/storyContent', array('storyId' => $introduction['md5'],'link' => $lastChapter))}">上一章</a></span>
-            <span><a class="btn-white" href="{:U('Index/storyChapters', array('id' => $introduction['md5']))}">目录</a></span>
-            <span><a class="btn-white" href="{:U('Index/storyContent', array('storyId' => $introduction['md5'],'link' => $nextChapter))}">下一章</a></span>
+<block name="head">
+    <div class="header">
+        <div class="head-nav">
+            <span class="home btn-green"><a
+                    href="{:U('home/index/storyChapters', array('storyId' => $chapterDetail['story_id']))}">首页</a></span>
+            <span id="head-title">{$introduction.name}</span>
         </div>
     </div>
-</div>
+</block>
 
-<div class="footer">
-    <span>小精灵手机小说</span>
-</div>
-</body>
-</html>
+<block name="body">
+    <div class="page-selector">
+        <div class="first-selector-row">
+        <span><a class="btn-white"
+                 href="{:U('Index/storyContent', array('storyId' => $introduction['md5'], 'link' => $lastChapter))}">上一章</a></span>
+            <span><a class="btn-white"
+                     href="{:U('Index/storyChapters', array('id' => $introduction['md5']))}">目录</a></span>
+            <span><a class="btn-white"
+                     href="{:U('Index/storyContent', array('storyId' => $introduction['md5'], 'link' => $nextChapter))}">下一章</a></span>
+        </div>
+    </div>
+
+    <div class="header head-hr"></div>
+
+    <div class="body">
+        <div class="chapter-name">
+            {$name}
+        </div>
+
+        <div class="content">
+            {$content}
+        </div>
+
+        <div class="page-selector">
+            <div class="second-selector-row">
+            <span><a class="btn-white"
+                     href="{:U('Index/storyContent', array('storyId' => $introduction['md5'],'link' => $lastChapter))}">上一章</a></span>
+                <span><a class="btn-white"
+                         href="{:U('Index/storyChapters', array('id' => $introduction['md5']))}">目录</a></span>
+                <span><a class="btn-white"
+                         href="{:U('Index/storyContent', array('storyId' => $introduction['md5'],'link' => $nextChapter))}">下一章</a></span>
+            </div>
+        </div>
+    </div>
+</block>
+
+<block name="foot">
+    <div class="footer">
+        <span>小精灵手机小说</span>
+    </div>
+</block>

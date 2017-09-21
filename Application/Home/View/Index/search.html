@@ -8,10 +8,6 @@
     <link rel="stylesheet" href="__PUBLIC__/css/index/search.css"/>
 </block>
 
-<block name="js">
-    <script type="text/javascript" src="__PUBLIC__/js/jquery-3.2.1.min.js"></script>
-</block>
-
 <block name="body">
     <div id="body">
         <div class="search-input">
@@ -46,13 +42,6 @@
 
 <block name="script">
     <script>
-        // 保证头部和尾部间隔
-        $(document).ready(function () {
-                var minHeight = $(window).height() - 100;
-                $("#body").attr("style", "min-height: " + minHeight + "px;");
-            }
-        )
-
         /**
          * 发起查找
          */
