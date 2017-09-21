@@ -77,7 +77,7 @@ class AntController
         $data['total_page'] = $pageInfo[1];
 
         $data['md5'] = md5($data['name'] . '|' . $data['author']);
-        $data['init_tag'] = 0;
+        $data['init_tag'] = 1;
         $data['update_time'] = time();
 
         // 小说信息落库
