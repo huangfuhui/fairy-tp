@@ -27,18 +27,23 @@
         <div id="story-cover"><img src="{$introduction.cover_url}"/></div>
         <div id="story-info">
             <div>作者：{$introduction.author}</div>
-            <div>简介：{$introduction.introduction}</div>
+            <div>类型：{$introduction.type}</div>
+            <div>状态：{$introduction.is_end}</div>
         </div>
         <div class="float-clean"></div>
+        <div class="header"></div>
+        <div id="story-intro">
+            <div>简介：{$introduction.introduction}</div>
+        </div>
     </div>
 
     <div class="header head-hr">
         <span class="tips">章节目录</span>
         <span class="sort btn-green">
             <if condition="$orderTag eq -1">
-                <a href="{:U('Index/storyChapters', array('storyId' => $introduction['id'], 'order' => 1))}">正序</a>
+                <a href="{:U('Index/storyChapters', array('id' => $introduction['id'], 'order' => 1))}">正序</a>
                 <else />
-                <a href="{:U('Index/storyChapters', array('storyId' => $introduction['id'], 'order' => -1))}">反序</a>
+                <a href="{:U('Index/storyChapters', array('id' => $introduction['id'], 'order' => -1))}">反序</a>
             </if>
         </span>
     </div>
@@ -46,25 +51,25 @@
     <div class="chapter-list">
         <volist name="chapterList" id="vo" key="k">
             <if condition="$k % 2 eq 0">
-                <a class="chapter-href double-row" href="{:U('Index/storyContent', array('storyId' => $introduction['id'], 'chapterId' => $vo['id']))}">{$vo.chapter_name}</a>
+                <a class="chapter-href double-row" href="{:U('Index/storyContent', array('storyId' => $introduction['id'], 'link' => $vo['chapter_url']))}">{$vo.chapter_name}</a>
                 <else />
-                <a class="chapter-href single-row" href="{:U('Index/storyContent', array('storyId' => $introduction['id'], 'chapterId' => $vo['id']))}">{$vo.chapter_name}</a>
+                <a class="chapter-href single-row" href="{:U('Index/storyContent', array('storyId' => $introduction['id'], 'link' => $vo['chapter_url']))}">{$vo.chapter_name}</a>
             </if>
         </volist>
     </div>
 
     <div class="page-selector">
         <div class="first-selector-row">
-            <span><a class="btn-white" href="{:U('Index/storyChapters', array('storyId' => $introduction['id'], 'page' => 1))}">首页</a></span>
-            <span><a class="btn-white" href="{:U('Index/storyChapters', array('storyId' => $introduction['id'], 'page' => $currentPage - 1))}">上一页</a></span>
-            <span><a class="btn-white" href="{:U('Index/storyChapters', array('storyId' => $introduction['id'], 'page' => $currentPage + 1))}">下一页</a></span>
-            <span><a class="btn-white" href="{:U('Index/storyChapters', array('storyId' => $introduction['id'], 'page' => $totalPage))}">尾页</a></span>
+            <span><a class="btn-white" href="{:U('Index/storyChapters', array('id' => $introduction['id'], 'order' => $orderTag, 'page' => 1))}">首页</a></span>
+            <span><a class="btn-white" href="{:U('Index/storyChapters', array('id' => $introduction['id'], 'order' => $orderTag, 'page' => $currentPage - 1))}">上一页</a></span>
+            <span><a class="btn-white" href="{:U('Index/storyChapters', array('id' => $introduction['id'], 'order' => $orderTag, 'page' => $currentPage + 1))}">下一页</a></span>
+            <span><a class="btn-white" href="{:U('Index/storyChapters', array('id' => $introduction['id'], 'order' => $orderTag, 'page' => $totalPage))}">尾页</a></span>
         </div>
 
         <div class="second-selector-row">
             <span><a class="btn-white">{$currentPage}/{$totalPage}</a></span>
             <span class="jump-form">
-                <form id="jump-form" action="{:U('Index/storyChapters/', array('storyId' => $introduction['id']))}" method="get">
+                <form id="jump-form" action="{:U('Index/storyChapters/', array('id' => $introduction['id'], 'order' => $orderTag))}" method="get">
                     <input type="text" placeholder="输入.." id="jump-page" name="page"/>
                 </form>
             </span>

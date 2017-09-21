@@ -10,7 +10,7 @@
     <meta name="keywords" content="{$introduction['name']} 小说"/>
     <meta name="description" content="{$introduction['name']} 无广告 无弹窗"/>
 
-    <title>{$introduction.name}|{$chapterDetail.chapter_name}</title>
+    <title>{$introduction.name}|{$name}</title>
 
     <link rel="stylesheet" href="__PUBLIC__/css/index/storyContent.css"/>
 </head>
@@ -24,9 +24,9 @@
 
 <div class="page-selector">
     <div class="first-selector-row">
-        <span><a class="btn-white" href="{:U('Index/storyContent', array('storyId' => $chapterDetail['story_id'], 'chapterId' => $lastChapter))}">上一章</a></span>
-        <span><a class="btn-white" href="{:U('Index/storyChapters', array('storyId' => $chapterDetail['story_id']))}">目录</a></span>
-        <span><a class="btn-white" href="{:U('Index/storyContent', array('storyId' => $chapterDetail['story_id'], 'chapterId' => $nextChapter))}">下一章</a></span>
+        <span><a class="btn-white" href="{:U('Index/storyContent', array('storyId' => $introduction['md5'], 'link' => $lastChapter))}">上一章</a></span>
+        <span><a class="btn-white" href="{:U('Index/storyChapters', array('id' => $introduction['md5']))}">目录</a></span>
+        <span><a class="btn-white" href="{:U('Index/storyContent', array('storyId' => $introduction['md5'], 'link' => $nextChapter))}">下一章</a></span>
     </div>
 </div>
 
@@ -34,7 +34,7 @@
 
 <div class="body">
     <div class="chapter-name">
-        {$chapterDetail.chapter_name}
+        {$name}
     </div>
 
     <div class="content">
@@ -43,9 +43,9 @@
 
     <div class="page-selector">
         <div class="second-selector-row">
-            <span><a class="btn-white" href="{:U('Index/storyContent', array('storyId' => $chapterDetail['story_id'],'chapterId' => $lastChapter))}">上一章</a></span>
-            <span><a class="btn-white" href="{:U('Index/storyChapters', array('storyId' => $chapterDetail['story_id']))}">目录</a></span>
-            <span><a class="btn-white" href="{:U('Index/storyContent', array('storyId' => $chapterDetail['story_id'],'chapterId' => $nextChapter))}">下一章</a></span>
+            <span><a class="btn-white" href="{:U('Index/storyContent', array('storyId' => $introduction['md5'],'link' => $lastChapter))}">上一章</a></span>
+            <span><a class="btn-white" href="{:U('Index/storyChapters', array('id' => $introduction['md5']))}">目录</a></span>
+            <span><a class="btn-white" href="{:U('Index/storyContent', array('storyId' => $introduction['md5'],'link' => $nextChapter))}">下一章</a></span>
         </div>
     </div>
 </div>

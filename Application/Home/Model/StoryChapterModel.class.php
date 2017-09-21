@@ -35,6 +35,15 @@ class StoryChapterModel extends Model
     }
 
     /**
+     * 初始化小说章节信息
+     * @param $chapters
+     */
+    public function initChapters($chapters)
+    {
+        $this->addAll($chapters);
+    }
+
+    /**
      * 更新小说章节信息
      * @param $chapters
      */

@@ -13,24 +13,26 @@ class StoryContentModel extends Model
 {
     /**
      * 获取小说内容
-     * @param $contentId
+     * @param $chapterMd5
      * @return mixed
      */
-    public function getContent($contentId)
+    public function getContent($chapterMd5)
     {
-        $content = $this->where(array('content_id' => $contentId))->field('content')->find();
-        empty($content) ? $content = '' : $content = $content['content'];
+        $content = $this->where(array('chapter_md5' => $chapterMd5))->field('content')->find();
+        empty($content['content']) ? $content = '' : $content = $content['content'];
         return $content;
     }
 
     /**
      * 保存小说内容
+     * @param string $chapterMd5
+     * @param string $chapterName
      * @param mixed|string $content
      * @return mixed
      */
-    public function saveContent($content)
+    public function saveContent($chapterMd5, $chapterName, $content)
     {
-        $id = $this->add(array('content' => $content));
+        $id = $this->add(array('chapter_md5' => $chapterMd5, 'chapter_name' => $chapterName, 'content' => $content));
         return $id;
     }
 }

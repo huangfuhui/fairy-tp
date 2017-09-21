@@ -48,30 +48,39 @@ class IndexController extends Controller
             redirect(U('Home/Index/index'));
         }
         $requestPage = empty(I('page')) ? 1 : I('page');
-        $order = (!empty(I('order')) && I('order') == 1) ? $order = 'id asc' : $order = 'id desc';
-        $orderTag = (!empty(I('order')) && I('order') == 1) ? $orderInfo = 1 : $orderInfo = -1;
+        (!empty(I('order')) && I('order') == 1) ? $orderTag = 1 : $orderTag = -1;
 
-//        $chapterCount = D('StoryChapter')->getChapterCount($storyId);
-//        $totalPage = ceil($chapterCount / 20);
-//        // 处理分页请求的合法性
-//        if ($requestPage < 1) {
-//            $requestPage = 1;
-//        } elseif ($requestPage > $totalPage) {
-//            $requestPage = $totalPage;
-//        }
-//
-//        // 获取小说简介
-//        $storyIntroduction = D('StoryInfo')->getStoryInfo($storyId);
-//
-//        // 获取小说章节列表
-//        $start = ($requestPage - 1) * 20;
-//        $chapterList = D('StoryChapter')->getChapterList($storyId, $start, 20, $order);
-//
-//        $this->assign('introduction', $storyIntroduction);
-//        $this->assign('chapterList', $chapterList);
-//        $this->assign('totalPage', $totalPage);
-//        $this->assign('currentPage', $requestPage);
-//        $this->assign('orderTag', $orderTag);
+        $storyId = D('StoryInfo')->getStoryIdByMd5($storyMd5);
+
+        // 小说未收录
+        if (empty($storyId)) {
+            // TODO: 策略爬取收录
+            redirect(U('Home/Index/index'));
+        }
+
+
+        $isInit = D('StoryInfo')->isInit($storyId);
+        // 初始化小说
+        if (!$isInit) {
+            A('Ant')->initStory($storyId);
+        }
+
+        $storyInfo = D('StoryInfo')->getStoryInfoByMd5($storyMd5);
+        $storyInfo['id'] = $storyMd5;
+        $storyInfo['type'] = D('StoryType')->getTagName($storyInfo['type']);
+        $storyInfo['is_end'] = getStatus($storyInfo['is_end']);
+
+        // 爬取章节列表
+        $chapterList = A('Ant')->getStoryChaptersSync($storyId, $requestPage, $orderTag);
+
+        // 更新章节页码
+        $storyInfo['total_page'] = A('Ant')->updatePageInfo($storyId, $storyInfo['menu_url']);
+
+        $this->assign('introduction', $storyInfo);
+        $this->assign('chapterList', $chapterList);
+        $this->assign('totalPage', $storyInfo['total_page']);
+        $this->assign('currentPage', $requestPage);
+        $this->assign('orderTag', $orderTag);
         $this->display();
     }
 
@@ -80,40 +89,23 @@ class IndexController extends Controller
      */
     public function storyContent()
     {
-        $chapterId = I('chapterId');
-        $chapterDetail = D('StoryChapter')->getChapterDetail($chapterId);
+        $storyId = I('storyId');
+        $chapterUrl = I('link');
 
-        // 章节信息获取错误
-        if (empty($chapterDetail)) {
-            redirect(U('Index/storyChapters'));
+        if (empty($chapterUrl) || 1 == substr_count($chapterUrl, '1')) {
+            redirect(U('Home/Index/storyChapters', array('id' => $storyId)));
         }
 
-        // 获取小说简介
-        $storyIntroduction = D('StoryInfo')->getStoryInfo($chapterDetail['story_id']);
+        $contentInfo = A('Ant')->getStoryContent($chapterUrl);
 
-        $contentId = $chapterDetail['content_id'];
-
-        // 无法获取章节对应的小说内容，则策略拉取并本地落库保存
-        if (null == $contentId) {
-            $ant = A('Ant');
-            $storyContent = $ant->getStoryContent($chapterDetail['chapter_url']);
-            $contentId = $storyContent['id'];
-            $content = $storyContent['content'];
-
-            D('StoryChapter')->updateContentId($chapterId, $contentId);
-        } else {
-            $content = D('StoryContent')->getContent($contentId);
-        }
-
-        // 获取上一章节和下一章节ID
-        $lastChapter = D('StoryChapter')->getLastChapter($chapterId);
-        $nextChapter = D('StoryChapter')->getNextChapter($chapterId);
+        // 小说简介
+        $storyIntroduction = D('storyInfo')->getStoryInfoByMd5($storyId);
 
         $this->assign('introduction', $storyIntroduction);
-        $this->assign('chapterDetail', $chapterDetail);
-        $this->assign('content', $content);
-        $this->assign('lastChapter', $lastChapter);
-        $this->assign('nextChapter', $nextChapter);
+        $this->assign('name', $contentInfo['chapterName']);
+        $this->assign('content', $contentInfo['content']);
+        $this->assign('lastChapter', $contentInfo['lastChapter']);
+        $this->assign('nextChapter', $contentInfo['nextChapter']);
         $this->display();
     }
 
