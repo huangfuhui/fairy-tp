@@ -54,15 +54,13 @@ class IndexController extends Controller
 
         // 小说未收录
         if (empty($storyId)) {
-            // TODO: 策略爬取收录
-            redirect(U('Home/Index/index'));
-        }
-
-
-        $isInit = D('StoryInfo')->isInit($storyId);
-        // 初始化小说
-        if (!$isInit) {
-            A('Ant')->initStory($storyId);
+            $storyId = A('Ant')->getStoryInfo(I('link'));
+        } else {
+            $isInit = D('StoryInfo')->isInit($storyId);
+            // 初始化小说
+            if (!$isInit) {
+                A('Ant')->initStory($storyId);
+            }
         }
 
         $storyInfo = D('StoryInfo')->getStoryInfoByMd5($storyMd5);

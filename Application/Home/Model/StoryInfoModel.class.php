@@ -32,6 +32,16 @@ class StoryInfoModel extends Model
     }
 
     /**
+     * 新增小说简介
+     * @param $info
+     * @return mixed
+     */
+    public function saveInfo($info)
+    {
+        return $this->add($info);
+    }
+
+    /**
      * 获取小说简介
      * @param $storyId
      * @return mixed

@@ -25,7 +25,7 @@ class AntController
         foreach ($result[3] as $k => $v) {
             $list[$k]['author'] = $v;
             $list[$k]['storyName'] = $result[2][$k];
-            $list[$k]['storyUrl'] = C('ANT_BASE_URL') . $result[1][$k];
+            $list[$k]['storyUrl'] = $result[1][$k];
             $list[$k]['md5'] = md5($list[$k]['storyName'] . '|' . $v);
         }
 
@@ -57,7 +57,7 @@ class AntController
 
         // 解析小说状态
         preg_match(C('ANT_STORY_status_PATTERN'), $res, $storyStatus);
-        $storyStatus[1] == '连载中' ? $data['is_end'] = 0 : $data['is_end'] = 1;
+        substr_count($storyStatus[1], '连载') > 0 ? $data['is_end'] = 0 : $data['is_end'] = 1;
 
         // 解析小说封面
         preg_match(C('ANT_STORY_COVER_URL_PATTERN'), $res, $coverURL);
@@ -165,6 +165,57 @@ class AntController
     }
 
     /**
+     * 爬取小说简介，落库保存
+     * @param $url
+     * @return mixed
+     */
+    public function getStoryInfo($url)
+    {
+        $data['base_url'] = C('ANT_BASE_URL') . "/$url/";
+        $res = curl_get($data['base_url']);
+
+        // 解析小说名字
+        preg_match(C('ANT_STORY_NAME_PATTERN'), $res, $storyName);
+        $data['name'] = $storyName[1];
+
+        // 解析小说作者
+        preg_match(C('ANT_STORY_AUTHOR_PATTERN'), $res, $storyAuthor);
+        $data['author'] = $storyAuthor[1];
+
+        // 解析小说分类
+        preg_match(C('ANT_STORY_TYPE_PATTERN'), $res, $storyType);
+        $data['type'] = D('StoryType')->getTag($storyType[1]);
+
+        // 解析小说状态
+        preg_match(C('ANT_STORY_status_PATTERN'), $res, $storyStatus);
+        substr_count($storyStatus[1], '连载') > 0 ? $data['is_end'] = 0 : $data['is_end'] = 1;
+
+        // 解析小说封面
+        preg_match(C('ANT_STORY_COVER_URL_PATTERN'), $res, $coverURL);
+        $data['cover_url'] = $coverURL[1];
+
+        // 解析小说简介
+        preg_match(C('ANT_STORY_introduction_PATTERN'), $res, $storyIntroduction);
+        $data['introduction'] = $storyIntroduction[1];
+
+        // 解析小说目录
+        preg_match(C('ANT_STORY_MENU_PATTERN'), $res, $menu);
+        $data['menu_url'] = C('ANT_BASE_URL') . $menu[1];
+
+        // 解析小说页码
+        $totalPageRes = curl_get($data['menu_url']);
+        preg_match(C('ANT_CHAPTER_LIST_PAGE_PATTERN'), $totalPageRes, $pageInfo);
+        $data['total_page'] = $pageInfo[1];
+
+        $data['md5'] = md5($data['name'] . '|' . $data['author']);
+        $data['init_tag'] = 1;
+        $data['update_time'] = time();
+
+        // 小说信息落库
+        return D('StoryInfo')->saveInfo($data);
+    }
+
+    /**
      * 异步爬取更新数据库章节信息
      * @param $storyId
      * @param $url
@@ -252,16 +303,5 @@ class AntController
         }
 
 //        D('StoryTopClick')->updateTopClick($data);
-    }
-
-    /**
-     * 爬取小说简介，落库保存
-     */
-    public function getStoryInfo()
-    {
-        $res = curl_get(C('ANT_URL'));
-        preg_match_all(C('ANT_PATTERN'), $res, $data);
-
-        dump($data);
     }
 }

@@ -23,13 +23,13 @@
         <div class="search-result">
             <volist name="result" id="vo" key="k">
                 <if condition="$k % 2 eq 0">
-                    <a class="chapter-href double-row" href="#">
+                    <a class="chapter-href double-row" href="{:U('Home/Index/storyChapters', array('id' => $vo['md5'], 'link' => $vo['storyUrl']))}">
                         <span class="storyName">{$vo.storyName}</span>
                         <span class="author">作者：{$vo.author}</span>
                         <div class="float-clean"></div>
                     </a>
                     <else/>
-                    <a class="chapter-href single-row" href="#">
+                    <a class="chapter-href single-row" href="{:U('Home/Index/storyChapters', array('id' => $vo['md5'], 'link' => $vo['storyUrl']))}">
                         <span class="storyName">{$vo.storyName}</span>
                         <span class="author">作者：{$vo.author}</span>
                         <div class="float-clean"></div>

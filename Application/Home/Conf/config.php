@@ -19,7 +19,7 @@ return array(
      * 正则表达式
      */
     // 搜索结果列表
-    'ANT_SEARCH_LIST_PATTERN' => '[<p class="line"><a href=".*">.*</a><a href="(.*)" class="blue">(.*)</a>/<a href="/author/.*">(.*)</a></p>]',
+    'ANT_SEARCH_LIST_PATTERN' => '[<p class="line"><a href=".*">.*</a><a href="/(.*)/" class="blue">(.*)</a>/<a href="/author/.*">(.*)</a></p>]',
     // 点击榜列表
     'ANT_TOP_CLICK_LIST_PATTERN' => '[<p class="line"><a href=".*">.*</a><a href="(.*)" class="blue">(.*)</a>/<a href=".*">(.*)</a></p>]',
     // 点击榜总页数
